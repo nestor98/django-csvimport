@@ -42,10 +42,10 @@ class CSVImport(models.Model):
     """ Logging model for importing files """
     model_choice = []
     model_name = models.CharField(max_length=255, blank=False,
-                                  default='csvimport.Item',
+                                  default='IS_app.Group4TransactionalData',
                                   help_text='Please specify the app_label.model_name',
                                   choices=get_models())
-    field_list = models.TextField(blank=True,
+    field_list = models.TextField(blank=False, default='1=booking_date,2=due_date,3=method,4=purpose,5=receiver,6=amount',
                                   help_text='''Enter list of fields in order only if
                                      you dont have a header row with matching field names, eg.
                                      "column1=shared_code,column2=org(Organisation|name)"''')
@@ -54,6 +54,7 @@ class CSVImport(models.Model):
     encoding = models.CharField(max_length=32, blank=True)
     upload_method = models.CharField(blank=False, max_length=50,
                                      default='manual', choices=CHOICES)
+    delimiter = models.CharField(max_length=10, blank=False, default=';') #new
     error_log = models.TextField(help_text='Each line is an import error')
     import_date = models.DateField(auto_now=True)
     import_user = models.CharField(max_length=255, default='anonymous',

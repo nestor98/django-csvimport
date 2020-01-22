@@ -21,6 +21,7 @@ class CSVImportAdmin(ModelAdmin):
         'encoding',
         'upload_method',
         'error_log_html',
+        'delimiter',
         'import_user']
     formfield_overrides = {
         models.CharField: {'widget': forms.Textarea(attrs={'rows': '4',
@@ -42,6 +43,7 @@ class CSVImportAdmin(ModelAdmin):
                       modelname=obj.model_name,
                       charset=obj.encoding,
                       uploaded=obj.upload_file,
+                      delimiter=obj.delimiter,
                       defaults=defaults)
         errors = cmd.run(logid=obj.id)
         if errors:
